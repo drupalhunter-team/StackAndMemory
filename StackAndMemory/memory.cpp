@@ -32,6 +32,7 @@ void memory::readNext(string s) throw (invalid_argument, out_of_range, overflow_
 	if (s[0]=='#')
 	{
 		//#A или #B
+		if (pointer_to_free_memory == 0) throw invalid_argument ("Wrong command");
 		if (s == "#A")
 			data[max_size -  pointer_to_free_memory] ++;
 		else if (s == "#B") 
