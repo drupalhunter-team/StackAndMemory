@@ -16,6 +16,8 @@ private:
 
 	unsigned int hex2int (string hex);
 	string int2hex (unsigned int input);
+	bool isHex(string hex);
+	
 
 public:
 	memory(string addr); // Implement constructor that get string containing "address" of first element
