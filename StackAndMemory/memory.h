@@ -8,14 +8,20 @@ using namespace std;
 
 class memory: public memory_abstract<unsigned int>{
 private:
+
 	int pointer_to_free_memory;
 
 	//Стек, отслеживающий блоки {}.
 	stack<int> executive_stack;
 	unsigned int start_address;
 
+	//Перевод 16го числа из строки в число
 	unsigned int hex2int (string hex);
+
+	//Перевод числа в строку в 16ой системе
 	string int2hex (unsigned int input);
+
+	//Проверка строки на соответствие 16ому числу
 	bool isHex(string hex);
 	
 
