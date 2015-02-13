@@ -1,16 +1,19 @@
-#ifndef MEMORY_H
+п»ї#ifndef MEMORY_H
 #define MEMORY_H
 
 #include "memory_abstract.h"
+#include <stack>
 
 using namespace std;
 
 class memory: public memory_abstract<unsigned int>{
 private:
-	// Write your code here
-	int point;
-	unsigned int start_adr;
-	const static int size = max_size; //  Объявлять константу вне класса?
+	int pointer_to_free_memory;
+
+	//РЎС‚РµРє, РѕС‚СЃР»РµР¶РёРІР°СЋС‰РёР№ Р±Р»РѕРєРё {}.
+	stack<int> executive_stack;
+	unsigned int start_address;
+
 public:
 	memory(string addr); // Implement constructor that get string containing "address" of first element
 	// Write your code here. Body of methods must be placed in memory.cpp file

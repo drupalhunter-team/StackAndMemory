@@ -1,4 +1,4 @@
-#ifndef MEMORY_ABSTRACT_H_
+﻿#ifndef MEMORY_ABSTRACT_H_
 #define MEMORY_ABSTRACT_H_
 
 #include <string>
