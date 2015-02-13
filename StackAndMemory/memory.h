@@ -30,6 +30,11 @@ public:
 	// Write your code here. Body of methods must be placed in memory.cpp file
 	unsigned int getValueByAddress(string s) throw (invalid_argument, out_of_range);
 	void readNext(string s) throw (invalid_argument, out_of_range, overflow_error); 
+
+	//Так как вызывающий код писать не надо, но в задании указаны примеры выходов,
+	//то эта процедура будет выводить результат работы на консоль, если во время выполнения программы
+	//не возникло исключений. Исключения предлагается отлаливать в блоке try/catch.
+	void print_answer();
 };
  
 #endif

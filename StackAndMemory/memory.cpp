@@ -29,7 +29,6 @@ unsigned int memory::getValueByAddress(string s) throw (invalid_argument, out_of
 
 void memory::readNext(string s) throw (invalid_argument, out_of_range, overflow_error)
 {
-	std::cout<<s.length();
 	if (s[0]=='#')
 	{
 		//#A или #B
@@ -59,7 +58,6 @@ void memory::readNext(string s) throw (invalid_argument, out_of_range, overflow_
 			//stol уже порождает исключения invalid_argument и out_of_range для long long
 			long long check_overflow_ui = stoll (s);
 			unsigned int number = (unsigned int)check_overflow_ui;
-			std::cout<<endl<<number<<" "<< check_overflow_ui;
 			
 			//stoll может распарсить первые числа несуществующей команды, поэтому
 			//проверяем, что подали именно число
@@ -109,5 +107,19 @@ bool memory::isHex (string hex)
 			return false;
 
 	return true;
+}
+
+void memory::print_answer ()
+{
+	cout<<"[";
+
+	for (int i = 0; i < pointer_to_free_memory; i++)
+		cout<<int2hex (data[i])<<" ";
+	if (pointer_to_free_memory != 0)
+		cout<<"... ";
+	for (int i = max_size - pointer_to_free_memory; i < max_size; i++)
+		cout<< data[i]<<" ";
+
+	cout<<"]";
 }
 #endif MEMORY_CPP_

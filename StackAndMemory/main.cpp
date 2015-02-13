@@ -22,11 +22,13 @@ int main (int argc, char* argv[]){
 		memory m(addr);
 		string lex;
 		while (fin.good() && getline(fin,lex,' '))	m.readNext(lex);
+		m.print_answer();
 	}
 	catch(exception &e){
 		cout << e.what();
 	}
 	fin.close();
-	
+	cout<<endl;
+	system("pause");
 	return EXIT_SUCCESS;
 }
