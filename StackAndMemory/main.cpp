@@ -17,14 +17,16 @@ int main (int argc, char* argv[]){
 		 string line, addr;
 		 fin >> addr;
 		 fin.get();
-	try{
-		memory m(addr);
-		string lex;
-		while (fin.good() && getline(fin,lex,' '))	m.readNext(lex);
-	}
-	catch(exception &e){
-		cout << e.what();
-	}
+
+	//NOT ROBUST
+	//try{
+	//	memory m(addr);
+	//	string lex;
+	//	while (fin.good() && getline(fin,lex,' '))	m.readNext(lex);
+	//}
+	//catch(exception &e){
+	//	cout << e.what();
+	//}
 	fin.close();
 	return EXIT_SUCCESS;
 }
