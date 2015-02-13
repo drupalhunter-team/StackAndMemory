@@ -14,6 +14,9 @@ private:
 	stack<int> executive_stack;
 	unsigned int start_address;
 
+	unsigned int hex2int (string hex);
+	string int2hex (unsigned int input);
+
 public:
 	memory(string addr); // Implement constructor that get string containing "address" of first element
 	// Write your code here. Body of methods must be placed in memory.cpp file
