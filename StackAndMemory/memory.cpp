@@ -1,9 +1,9 @@
-#ifndef MEMORY_CPP_
+п»ї#ifndef MEMORY_CPP_
 #define MEMORY_CPP_
 #include "memory.h"
 #include <sstream>
 #include <iostream>
-
+//Kirill Makarov, 202 VS2012.
 memory::memory(string addr)
 {
 	start_address = hex2int(addr);
@@ -18,7 +18,7 @@ unsigned int memory::getValueByAddress(string s) throw (invalid_argument, out_of
 
 	unsigned int address = memory::hex2int(s);
 
-	//Ищем адресс в левом стеке.
+	//РС‰РµРј Р°РґСЂРµСЃСЃ РІ Р»РµРІРѕРј СЃС‚РµРєРµ.
 	for (int i = 0; i < pointer_to_free_memory; i++)
 		if (data[i] == address)
 			return data[max_size - 1 - i]; 
@@ -31,11 +31,11 @@ void memory::readNext(string s) throw (invalid_argument, out_of_range, overflow_
 {
 	if (s[0]=='#')
 	{
-		//#A или #B
+		//#A РёР»Рё #B
 		if (s == "#A")
-			data[max_size - 1 - pointer_to_free_memory] ++;
+			data[max_size -  pointer_to_free_memory] ++;
 		else if (s == "#B") 
-			data[max_size - 1 - pointer_to_free_memory] --;
+			data[max_size -  pointer_to_free_memory] --;
 		else 
 			throw invalid_argument("Command is invalid");
 	}
@@ -47,34 +47,34 @@ void memory::readNext(string s) throw (invalid_argument, out_of_range, overflow_
 		}
 		else if (s=="}")
 		{
-			//Данные физические не сотрутся, но мы будем считать их свободными
+			//Р”Р°РЅРЅС‹Рµ С„РёР·РёС‡РµСЃРєРёРµ РЅРµ СЃРѕС‚СЂСѓС‚СЃСЏ, РЅРѕ РјС‹ Р±СѓРґРµРј СЃС‡РёС‚Р°С‚СЊ РёС… СЃРІРѕР±РѕРґРЅС‹РјРё
 			pointer_to_free_memory = executive_stack.top();
 			executive_stack.pop();
 		}
 		else
 		{
-			//Обработка чисел и лексем, не являющихся частью языка.
+			//РћР±СЂР°Р±РѕС‚РєР° С‡РёСЃРµР» Рё Р»РµРєСЃРµРј, РЅРµ СЏРІР»СЏСЋС‰РёС…СЃСЏ С‡Р°СЃС‚СЊСЋ СЏР·С‹РєР°.
 
-			//stol уже порождает исключения invalid_argument и out_of_range для long long
+			//stol СѓР¶Рµ РїРѕСЂРѕР¶РґР°РµС‚ РёСЃРєР»СЋС‡РµРЅРёСЏ invalid_argument Рё out_of_range РґР»СЏ long long
 			long long check_overflow_ui = stoll (s);
 			unsigned int number = (unsigned int)check_overflow_ui;
 			
-			//stoll может распарсить первые числа несуществующей команды, поэтому
-			//проверяем, что подали именно число
+			//stoll РјРѕР¶РµС‚ СЂР°СЃРїР°СЂСЃРёС‚СЊ РїРµСЂРІС‹Рµ С‡РёСЃР»Р° РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РµР№ РєРѕРјР°РЅРґС‹, РїРѕСЌС‚РѕРјСѓ
+			//РїСЂРѕРІРµСЂСЏРµРј, С‡С‚Рѕ РїРѕРґР°Р»Рё РёРјРµРЅРЅРѕ С‡РёСЃР»Рѕ
 			if (std::to_string(check_overflow_ui) != s)
 				throw invalid_argument ("Command is invalid");
 
 
-			//Провереем out_of_range для unsigned int
+			//РџСЂРѕРІРµСЂРµРµРј out_of_range РґР»СЏ unsigned int
 			if (number!=check_overflow_ui)
 				throw out_of_range("Number is not unsigned int");
 			
-			//Теперь работаем только с числами
+			//РўРµРїРµСЂСЊ СЂР°Р±РѕС‚Р°РµРј С‚РѕР»СЊРєРѕ СЃ С‡РёСЃР»Р°РјРё
 			
 			if (max_size - 1 - pointer_to_free_memory <= pointer_to_free_memory)
 				throw overflow_error("Stack is overflow");
 
-			//И в стеке достаточно места
+			//Р РІ СЃС‚РµРєРµ РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РјРµСЃС‚Р°
 			data[pointer_to_free_memory] = start_address + pointer_to_free_memory * sizeof(unsigned int);
 			data [max_size - 1 - pointer_to_free_memory] = number;
 			pointer_to_free_memory++;

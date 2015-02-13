@@ -1,6 +1,6 @@
 ﻿#ifndef MEMORY_H
 #define MEMORY_H
-
+//Kirill Makarov 202SE, VS2012
 #include "memory_abstract.h"
 #include <stack>
 
